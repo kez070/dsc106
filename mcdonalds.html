@@ -1,0 +1,863 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<h3>It is quite clear that after the impossible burger was released in october of 2018, there was a dip in
+    in sales of the mcdonalds hamburger </h3>
+<div id="container2" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<div id="container3" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<h3>We can also see that the impossible burger had an effect on both chicken filet and fish filet sales 
+    even though they may not be considered as direct competitors to the impossible burger. 
+</h3>
+
+
+<div id="container4" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<div id="container5" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
+<h3> While there was a decrease in sales from september to october across the board, the hamburger category did suffer the most</h3>
+
+<div id="container6" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
+<h3> We can see that while there is a rebound in percentage of sales after october, sales continue to decline in the following month</h3>
+
+<div id="container7" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
+<div id="container8" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
+<h3>Here we are observing the daily data for the month of january. We see that there doesnt seem to be any trends from the line graph since
+    it is just convuluted. We can also see that sales are quite even across the board during different days of the week.
+</h3>
+
+<script>
+    d3.csv("monthly_sales_edited.csv", function(data) {
+        console.log(data[0]);
+        years = [];
+        
+        central_ham = []
+        ne_ham = []
+        nw_ham = []
+        se_ham = []
+        sw_ham = []
+
+        for (var i =0; i<data.length;i++){
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['HM-C']));
+            central_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['HM-NE']));
+            ne_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['HM-SW']));
+            sw_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['HM-SE']));
+            se_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['HM-NW']));
+            nw_ham.push(temp);
+            temp = []
+        }
+
+        central_cf = []
+        ne_cf = []
+        nw_cf = []
+        se_cf = []
+        sw_cf = []
+
+        for (var i =0; i<data.length;i++){
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['CF-C']));
+            central_cf.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['CF-NE']));
+            ne_cf.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['CF-SW']));
+            sw_cf.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['CF-SE']));
+            se_cf.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['CF-NW']));
+            nw_cf.push(temp);
+            temp = []
+        }
+
+        central_ff = []
+        ne_ff = []
+        nw_ff = []
+        se_ff = []
+        sw_ff = []
+
+        for (var i =0; i<data.length;i++){
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['FF-C']));
+            central_ff.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['FF-NE']));
+            ne_ff.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['FF-SW']));
+            sw_ff.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['FF-SE']));
+            se_ff.push(temp);
+            temp = []
+
+            temp.push(Date.UTC('20'+data[i].year,data[i].month,1));
+            temp.push(parseInt(data[i]['FF-NW']));
+            nw_ff.push(temp);
+            temp = []
+        }
+
+        september_data = [ne_ff[32][1]+central_ff[32][1]+nw_ff[32][1]+se_ff[32][1]+sw_ff[32][1],
+        ne_cf[32][1]+central_cf[32][1]+nw_cf[32][1]+se_cf[32][1]+sw_cf[32][1],
+        ne_ham[32][1]+central_ham[32][1]+nw_ham[32][1]+se_ham[32][1]+sw_ham[32][1]]
+
+        august_data = [ne_ff[33][1]+central_ff[33][1]+nw_ff[33][1]+se_ff[33][1]+sw_ff[33][1],
+        ne_cf[33][1]+central_cf[33][1]+nw_cf[33][1]+se_cf[33][1]+sw_cf[33][1],
+        ne_ham[33][1]+central_ham[33][1]+nw_ham[33][1]+se_ham[33][1]+sw_ham[33][1]]
+
+        september_data_ind = [ne_ff[32][1],central_ff[32][1],nw_ff[32][1],se_ff[32][1],sw_ff[32][1],
+        ne_cf[32][1],central_cf[32][1],nw_cf[32][1],se_cf[32][1],sw_cf[32][1],
+        ne_ham[32][1],central_ham[32][1],nw_ham[32][1],se_ham[32][1],sw_ham[32][1]]
+
+        august_data_ind = [ne_ff[33][1],central_ff[33][1],nw_ff[33][1],se_ff[33][1],sw_ff[33][1],
+        ne_cf[33][1],central_cf[33][1],nw_cf[33][1],se_cf[33][1],sw_cf[33][1],
+        ne_ham[33][1],central_ham[33][1],nw_ham[33][1],se_ham[33][1],sw_ham[32][1]]
+
+        perc_ne_ff = []
+        perc_nw_ff = []
+        perc_se_ff = []
+        perc_sw_ff = []
+        perc_central_ff = []
+        for (var i =1; i<ne_ff.length;i++) {
+            perc_ne_ff.push((ne_ff[i][1]-ne_ff[i-1][1])/ne_ff[i][1] *100);
+            perc_nw_ff.push((nw_ff[i][1]-nw_ff[i-1][1])/nw_ff[i][1] *100);
+            perc_se_ff.push((se_ff[i][1]-se_ff[i-1][1])/se_ff[i][1] *100);
+            perc_sw_ff.push((sw_ff[i][1]-sw_ff[i-1][1])/sw_ff[i][1] *100);
+            perc_central_ff.push((central_ff[i][1]-central_ff[i-1][1])/central_ff[i][1] *100);
+
+        }
+
+        console.log(years);
+        var chart1 = new Highcharts.chart('container', {
+
+        title: {
+            text: 'Hamburger Sales in All regions'
+        },
+
+
+        yAxis: {
+            title: {
+                text: 'Number of Sales'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        xAxis: {
+            type: 'datetime',
+            tickInterval: 1000 * 3600 * 24 *30 
+            
+        },
+
+        series: [{
+            name: 'Central Hamburger Sales',
+            data: central_ham
+        },
+        {
+            name: 'North East Hamburger Sales',
+            data: ne_ham
+        },
+        {
+            name: 'South East Hamburger Sales',
+            data: se_ham
+        },
+        {
+            name: 'North West Hamburger Sales',
+            data: nw_ham
+        },
+        {
+            name: 'South West Hamburger Sales',
+            data: sw_ham
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        });
+        
+        var chart2 = new Highcharts.chart('container2', {
+
+            title: {
+                text: 'Chicken Filet Sales in All regions'
+            },
+
+
+            yAxis: {
+                title: {
+                    text: 'Number of Sales'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            xAxis: {
+                type: 'datetime',
+                tickInterval: 1000 * 3600 * 24 *30 
+                
+            },
+
+            series: [{
+                name: 'Central Chicken Filet Sales',
+                data: central_cf
+            },
+            {
+                name: 'North East Chicken Filet Sales',
+                data: ne_cf
+            },
+            {
+                name: 'South East Chicken Filet Sales',
+                data: se_cf
+            },
+            {
+                name: 'North West Chicken Filet Sales',
+                data: nw_cf
+            },
+            {
+                name: 'South West Chicken Filet Sales',
+                data: sw_cf
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+            });
+        
+        var chart3 = new Highcharts.chart('container3', {
+
+            title: {
+                text: 'Fish Filet Sales in All regions'
+            },
+
+
+            yAxis: {
+                title: {
+                    text: 'Number of Sales'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            xAxis: {
+                type: 'datetime',
+                tickInterval: 1000 * 3600 * 24 *30 
+                
+            },
+
+            series: [{
+                name: 'Central Fish Filet Sales',
+                data: central_ff
+            },
+            {
+                name: 'North East Fish Filet Sales',
+                data: ne_ff
+            },
+            {
+                name: 'South East Fish Filet Sales',
+                data: se_ff
+            },
+            {
+                name: 'North West Fish Filet Sales',
+                data: nw_ff
+            },
+            {
+                name: 'South West Fish Filet Sales',
+                data: sw_ff
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+            });
+
+        var chart4 = new Highcharts.chart('container4', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Comparison of Burger Sales Before and After Release of Impossible Burger (in aggregate)'
+            },
+            xAxis: {
+                categories: ['Fish Filet','Chicken Filet','Hamburger'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Population (millions)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'September 2018',
+                data: september_data
+            }, {
+                name: 'August 2018',
+                data: august_data
+            }]
+        });
+        
+        var chart5 = new Highcharts.chart('container5', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Comparison of Burger Sales Before and After Release of Impossible Burger (by region)'
+            },
+            xAxis: {
+                categories: ['Fish Filet - NE','Fish Filet - Central','Fish Filet -NW','Fish Filet - SE','Fish Filet - SW',
+                'Chicken Filet - NE','Chicken Filet - Central','Chicken Filet -NW','Chicken Filet - SE','Chicken Filet - SW',
+                'Hamburger - NE','Hamburger - Central','Hamburger - NW','Hamburger - SE','Hamburger - SW'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Population (millions)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'September 2018',
+                data: september_data_ind
+            }, {
+                name: 'October 2018',
+                data: august_data_ind
+            }]
+        });
+    
+        var chart6 = new Highcharts.chart('container6', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Percentage Change in Sales'
+            },
+            xAxis: {
+                categories: ['August-September','September-October', 'October-November','November-December']
+            },
+            yAxis: {
+                
+                title: {
+                    text: 'Percenetage Change',
+                    
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            
+            series: [{
+                name: 'Fish Filet NE',
+                data: [perc_ne_ff[31],perc_ne_ff[32],perc_ne_ff[33],perc_ne_ff[34]]
+            }, {
+                name: 'Fish Filet NW',
+                data: [perc_nw_ff[31],perc_nw_ff[32],perc_nw_ff[33],perc_nw_ff[34]]
+            }, {
+                name: 'Fish Filet SW',
+                data: [perc_sw_ff[31],perc_sw_ff[32],perc_sw_ff[33],perc_sw_ff[34]]
+            }]
+        });
+
+
+
+    })
+
+    d3.csv("daily_sales.csv", function(data) {
+        console.log(data)
+
+        central_ham = []
+        ne_ham = []
+        nw_ham = []
+        se_ham = []
+        sw_ham = []
+
+        for (var i =0; i<data.length;i++){
+            temp = []
+
+            temp.push(Date.UTC(2016,0,i+1));
+            temp.push(parseInt(data[i]['HM-C']));
+            central_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC(2016,0,i+1));
+            temp.push(parseInt(data[i]['HM-NE']));
+            ne_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC(2016,0,i+1));
+            temp.push(parseInt(data[i]['HM-SW']));
+            sw_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC(2016,0,i+1));
+            temp.push(parseInt(data[i]['HM-SE']));
+            se_ham.push(temp);
+            temp = []
+
+            temp.push(Date.UTC(2016,0,i+1));
+            temp.push(parseInt(data[i]['HM-NW']));
+            nw_ham.push(temp);
+            temp = []
+        }
+
+
+        monday = []
+        tuesday = []
+        wednesday = []
+        thursday = []
+        friday = []
+        saturday = []
+        sunday = []
+
+        for (var i =0; i<data.length;i++){
+            if(data[i]['weekday'] =='Monday'){
+                monday.push(parseInt(data[i]['HM-NW']))
+                monday.push(parseInt(data[i]['HM-SW']))
+                monday.push(parseInt(data[i]['HM-NE']))
+                monday.push(parseInt(data[i]['HM-SE']))
+                monday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Tuesday'){
+                tuesday.push(parseInt(data[i]['HM-NW']))
+                tuesday.push(parseInt(data[i]['HM-SW']))
+                tuesday.push(parseInt(data[i]['HM-NE']))
+                tuesday.push(parseInt(data[i]['HM-SE']))
+                tuesday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Wednesday'){
+                wednesday.push(parseInt(data[i]['HM-NW']))
+                wednesday.push(parseInt(data[i]['HM-SW']))
+                wednesday.push(parseInt(data[i]['HM-NE']))
+                wednesday.push(parseInt(data[i]['HM-SE']))
+                wednesday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Thursday'){
+                thursday.push(parseInt(data[i]['HM-NW']))
+                thursday.push(parseInt(data[i]['HM-SW']))
+                thursday.push(parseInt(data[i]['HM-NE']))
+                thursday.push(parseInt(data[i]['HM-SE']))
+                thursday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Friday'){
+                friday.push(parseInt(data[i]['HM-NW']))
+                friday.push(parseInt(data[i]['HM-SW']))
+                friday.push(parseInt(data[i]['HM-NE']))
+                friday.push(parseInt(data[i]['HM-SE']))
+                friday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Saturday'){
+                saturday.push(parseInt(data[i]['HM-NW']))
+                saturday.push(parseInt(data[i]['HM-SW']))
+                saturday.push(parseInt(data[i]['HM-NE']))
+                saturday.push(parseInt(data[i]['HM-SE']))
+                saturday.push(parseInt(data[i]['HM-C']))
+            }
+            else if(data[i]['weekday'] =='Sunday'){
+                sunday.push(parseInt(data[i]['HM-NW']))
+                sunday.push(parseInt(data[i]['HM-SW']))
+                sunday.push(parseInt(data[i]['HM-NE']))
+                sunday.push(parseInt(data[i]['HM-SE']))
+                sunday.push(parseInt(data[i]['HM-C']))
+            }
+        }
+
+        var mon_val = monday.reduce((a,b) => a + b, 0) / monday.length
+        var tues_val = tuesday.reduce((a,b) => a + b, 0) /tuesday.length
+        var wed_val = wednesday.reduce((a,b) => a + b, 0) / wednesday.length
+        var thurs_val = thursday.reduce((a,b) => a + b, 0) / thursday.length
+        var fri_val = friday.reduce((a,b) => a + b, 0) / friday.length
+        var sat_val = saturday.reduce((a,b) => a + b, 0) / saturday.length
+        var sun_val = sunday.reduce((a,b) => a + b, 0) /sunday.length
+
+
+        monday = []
+        tuesday = []
+        wednesday = []
+        thursday = []
+        friday = []
+        saturday = []
+        sunday = []
+
+        for (var i =0; i<data.length;i++){
+            if(data[i]['weekday'] =='Monday'){
+                monday.push(parseInt(data[i]['FF-NW']))
+                monday.push(parseInt(data[i]['FF-SW']))
+                monday.push(parseInt(data[i]['FF-NE']))
+                monday.push(parseInt(data[i]['FF-SE']))
+                monday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Tuesday'){
+                tuesday.push(parseInt(data[i]['FF-NW']))
+                tuesday.push(parseInt(data[i]['FF-SW']))
+                tuesday.push(parseInt(data[i]['FF-NE']))
+                tuesday.push(parseInt(data[i]['FF-SE']))
+                tuesday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Wednesday'){
+                wednesday.push(parseInt(data[i]['FF-NW']))
+                wednesday.push(parseInt(data[i]['FF-SW']))
+                wednesday.push(parseInt(data[i]['FF-NE']))
+                wednesday.push(parseInt(data[i]['FF-SE']))
+                wednesday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Thursday'){
+                thursday.push(parseInt(data[i]['FF-NW']))
+                thursday.push(parseInt(data[i]['FF-SW']))
+                thursday.push(parseInt(data[i]['FF-NE']))
+                thursday.push(parseInt(data[i]['FF-SE']))
+                thursday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Friday'){
+                friday.push(parseInt(data[i]['FF-NW']))
+                friday.push(parseInt(data[i]['FF-SW']))
+                friday.push(parseInt(data[i]['FF-NE']))
+                friday.push(parseInt(data[i]['FF-SE']))
+                friday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Saturday'){
+                saturday.push(parseInt(data[i]['FF-NW']))
+                saturday.push(parseInt(data[i]['FF-SW']))
+                saturday.push(parseInt(data[i]['FF-NE']))
+                saturday.push(parseInt(data[i]['FF-SE']))
+                saturday.push(parseInt(data[i]['FF-C']))
+            }
+            else if(data[i]['weekday'] =='Sunday'){
+                sunday.push(parseInt(data[i]['FF-NW']))
+                sunday.push(parseInt(data[i]['FF-SW']))
+                sunday.push(parseInt(data[i]['FF-NE']))
+                sunday.push(parseInt(data[i]['FF-SE']))
+                sunday.push(parseInt(data[i]['FF-C']))
+            }
+        }
+
+        var mon_val_ff = monday.reduce((a,b) => a + b, 0) / monday.length
+        var tues_val_ff = tuesday.reduce((a,b) => a + b, 0) /tuesday.length
+        var wed_val_ff = wednesday.reduce((a,b) => a + b, 0) / wednesday.length
+        var thurs_val_ff = thursday.reduce((a,b) => a + b, 0) / thursday.length
+        var fri_val_ff = friday.reduce((a,b) => a + b, 0) / friday.length
+        var sat_val_ff = saturday.reduce((a,b) => a + b, 0) / saturday.length
+        var sun_val_ff = sunday.reduce((a,b) => a + b, 0) /sunday.length
+
+
+        for (var i =0; i<data.length;i++){
+            if(data[i]['weekday'] =='Monday'){
+                monday.push(parseInt(data[i]['CF-NW']))
+                monday.push(parseInt(data[i]['CF-SW']))
+                monday.push(parseInt(data[i]['CF-NE']))
+                monday.push(parseInt(data[i]['CF-SE']))
+                monday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Tuesday'){
+                tuesday.push(parseInt(data[i]['CF-NW']))
+                tuesday.push(parseInt(data[i]['CF-SW']))
+                tuesday.push(parseInt(data[i]['CF-NE']))
+                tuesday.push(parseInt(data[i]['CF-SE']))
+                tuesday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Wednesday'){
+                wednesday.push(parseInt(data[i]['CF-NW']))
+                wednesday.push(parseInt(data[i]['CF-SW']))
+                wednesday.push(parseInt(data[i]['CF-NE']))
+                wednesday.push(parseInt(data[i]['CF-SE']))
+                wednesday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Thursday'){
+                thursday.push(parseInt(data[i]['CF-NW']))
+                thursday.push(parseInt(data[i]['CF-SW']))
+                thursday.push(parseInt(data[i]['CF-NE']))
+                thursday.push(parseInt(data[i]['CF-SE']))
+                thursday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Friday'){
+                friday.push(parseInt(data[i]['CF-NW']))
+                friday.push(parseInt(data[i]['CF-SW']))
+                friday.push(parseInt(data[i]['CF-NE']))
+                friday.push(parseInt(data[i]['CF-SE']))
+                friday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Saturday'){
+                saturday.push(parseInt(data[i]['CF-NW']))
+                saturday.push(parseInt(data[i]['CF-SW']))
+                saturday.push(parseInt(data[i]['CF-NE']))
+                saturday.push(parseInt(data[i]['CF-SE']))
+                saturday.push(parseInt(data[i]['CF-C']))
+            }
+            else if(data[i]['weekday'] =='Sunday'){
+                sunday.push(parseInt(data[i]['CF-NW']))
+                sunday.push(parseInt(data[i]['CF-SW']))
+                sunday.push(parseInt(data[i]['CF-NE']))
+                sunday.push(parseInt(data[i]['CF-SE']))
+                sunday.push(parseInt(data[i]['CF-C']))
+            }
+        }
+
+        var mon_val_cf = monday.reduce((a,b) => a + b, 0) / monday.length
+        var tues_val_cf = tuesday.reduce((a,b) => a + b, 0) /tuesday.length
+        var wed_val_cf = wednesday.reduce((a,b) => a + b, 0) / wednesday.length
+        var thurs_val_cf = thursday.reduce((a,b) => a + b, 0) / thursday.length
+        var fri_val_cf = friday.reduce((a,b) => a + b, 0) / friday.length
+        var sat_val_cf = saturday.reduce((a,b) => a + b, 0) / saturday.length
+        var sun_val_cf = sunday.reduce((a,b) => a + b, 0) /sunday.length
+        console.log(mon_val)
+
+        var chart1 = new Highcharts.chart('container7', {
+
+            title: {
+                text: 'Hamburger Sales in All regions'
+            },
+
+
+            yAxis: {
+                title: {
+                    text: 'Number of Sales'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            xAxis: {
+                type: 'datetime',
+                tickInterval: 1000 * 3600 * 24 
+                
+            },
+
+            series: [{
+                name: 'Central Hamburger Sales',
+                data: central_ham
+            },
+            {
+                name: 'North East Hamburger Sales',
+                data: ne_ham
+            },
+            {
+                name: 'South East Hamburger Sales',
+                data: se_ham
+            },
+            {
+                name: 'North West Hamburger Sales',
+                data: nw_ham
+            },
+            {
+                name: 'South West Hamburger Sales',
+                data: sw_ham
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+            });
+
+        var chart2 = new Highcharts.chart('container8', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Monthly Average Rainfall'
+            },
+            subtitle: {
+                text: 'Source: WorldClimate.com'
+            },
+            xAxis: {
+                categories: [
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                    'Sunday'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Number of Burgers Sold'
+                }
+            },
+            
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Hamburger',
+                data: [mon_val,tues_val,wed_val,thurs_val,fri_val,sat_val,sun_val]
+
+            },
+            {
+                name: 'Fish Filet',
+                data: [mon_val_ff,tues_val_ff,wed_val_ff,thurs_val_ff,fri_val_ff,sat_val_ff,sun_val_ff]
+
+            },
+            {
+                name: 'Chicken Filet',
+                data: [mon_val_cf,tues_val_cf,wed_val_cf,thurs_val_cf,fri_val_cf,sat_val_cf,sun_val_cf]
+
+            }]
+        });    
+
+    })
+
+</script>
