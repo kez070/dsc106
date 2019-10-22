@@ -3,30 +3,87 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://d3js.org/d3.v4.js"></script>
 
+<div>
+    <h1 style='text-align:center'>Mcdonalds Report on the Impact of the Impossible Burger</h1>
+</div>
+<div>
+        <a href="/mcdonalds_pdf.pdf" download>Click Here to Download PDF</a>
+
+</div>
+
+
+
+<div id="container9" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto">
+</div>
+
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+        <p style='text-align:center'>As you can see, the hamburger has the most sales in comparison to our other offerings by a wide margin.
+                Hence, it is important to understand the impact of the impossible burger on the sales of our hamburger as well as our other products. We want to 
+                pay attention to October 2018 because that is when our competitor released the impossible burger. In this report I want to try to determine whether the impossible 
+                burger is a competitor to our normal hamburger.</p>
+</div>
+
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-<h3>It is quite clear that after the impossible burger was released in october of 2018, there was a dip in
-    in sales of the mcdonalds hamburger </h3>
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+
+    <p>It is quite clear that after the impossible burger was released in october of 2018, there was a dip in
+        in sales of the mcdonalds hamburger. Furthermore, we see that sales never reach the figures we see in may and july of 2018 in the 
+    months following the realease of the impossible burger. Hence we can already see that there is an effect on our beef hamburger market. </p>
+</div>
 <div id="container2" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 <div id="container3" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-<h3>We can also see that the impossible burger had an effect on both chicken filet and fish filet sales 
-    even though they may not be considered as direct competitors to the impossible burger. 
-</h3>
+
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+
+    <p>We can also see that the impossible burger had an effect on both chicken filet and fish filet sales 
+        even though they may not be considered as direct competitors to the impossible burger. Hence our entire product line of burgers has been effected
+        by the impossible burger. 
+    </p>
+</div>
 
 
 <div id="container4" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+
+        <p>
+            Here we can see the effect of the Impossible Burger on our sales in comparison to the month before it was launched. It is clear here that our hamburger category suffered the most. 
+        </p>
+</div>
+
 <div id="container5" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
-<h3> While there was a decrease in sales from september to october across the board, the hamburger category did suffer the most</h3>
 
 <div id="container6" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
-<h3> We can see that while there is a rebound in percentage of sales after october, sales continue to decline in the following month</h3>
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+        <h1>Conclusion on the Impossible Burger</h1>
+        <p>
+                We can see that while there is a rebound in percentage of sales after october, sales continue to decline in the following month. Hence following 
+                this data and the previous data we looked at, I conclude that the impossible burger has taken some market share of not only our beef hamburger,  but 
+                also our other offerings like chicken and fish. Hence it is my recommendation that we immediately push out a vegetarian burger like the impossible burger.  
+        </p>
+</div>
 
 <div id="container7" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+        <h1>Analysis of Daily Sales</h1>
+        <p>
+            In this analysis of the daily sales throughout January 2018, we dont see anything too significant through the hamburger sales throughout the month.
+            There is no pattern that really sticks out and the graph seems quite convuluted. 
+        </p>
+</div>
 <div id="container8" style="min-width: 310px; max-width: 800px; height: 700px; margin: 0 auto"></div>
-<h3>Here we are observing the daily data for the month of january. We see that there doesnt seem to be any trends from the line graph since
-    it is just convuluted. We can also see that sales are quite even across the board during different days of the week.
-</h3>
+<div id="container91" style="min-width: 310px; max-width: 800px; margin: 0 auto">
+        <p>
+            We observe that on average, per the day of the week, there is no real deviation in the numbers of burgers sold. However, there is a slight bump in sales
+            for the fish filet during the weekdays, and lower amounts consumed during the weekend. This may be because it is seen as a healthy food so someone who is busy
+            during the week may eat a fish filet, while they have more time to get other healthy alternatives on the not so busy weekend. Hence a recommendation I can make to
+            further boost sales during the week are to make some type of deal for the fish filet during the weekdays to capture more of the audience who wants some healthy food 
+            during the week. 
+        </p>
+</div>
+
 
 <script>
+
     d3.csv("monthly_sales_edited.csv", function(data) {
         console.log(data[0]);
         years = [];
@@ -150,7 +207,7 @@
 
         august_data_ind = [ne_ff[33][1],central_ff[33][1],nw_ff[33][1],se_ff[33][1],sw_ff[33][1],
         ne_cf[33][1],central_cf[33][1],nw_cf[33][1],se_cf[33][1],sw_cf[33][1],
-        ne_ham[33][1],central_ham[33][1],nw_ham[33][1],se_ham[33][1],sw_ham[32][1]]
+        ne_ham[33][1],central_ham[33][1],nw_ham[33][1],se_ham[33][1],sw_ham[33][1]]
 
         perc_ne_ff = []
         perc_nw_ff = []
@@ -165,6 +222,8 @@
             perc_central_ff.push((central_ff[i][1]-central_ff[i-1][1])/central_ff[i][1] *100);
 
         }
+
+        
 
         console.log(years);
         var chart1 = new Highcharts.chart('container', {
@@ -502,6 +561,47 @@
             }]
         });
 
+        Highcharts.chart('container9', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Total Burger Sales by Type'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            name: 'Total Burgers Sold',
+            colorByPoint: true,
+            data: [{
+                name: 'HamBurgers',
+                y: 317267030,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Fish Filets',
+                y: 79426764
+            },
+            {
+                name: 'Chicken Filets',
+                y: 132154618
+            }]
+        }]
+});
 
 
     })
@@ -856,7 +956,9 @@
                 data: [mon_val_cf,tues_val_cf,wed_val_cf,thurs_val_cf,fri_val_cf,sat_val_cf,sun_val_cf]
 
             }]
-        });    
+        });  
+        
+       
 
     })
 
